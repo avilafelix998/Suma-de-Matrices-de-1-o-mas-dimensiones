@@ -26,10 +26,10 @@
     <div id="resultado"></div>
 </body>
 <script>
-    function generarMatrices() {
+function generarMatrices() {
     const filas = document.getElementById("filas").value;
     const columnas = document.getElementById("columnas").value;
-    
+
     if (!filas || !columnas || filas <= 0 || columnas <= 0) {
         alert("Por favor, ingresa un número válido de filas y columnas.");
         return;
@@ -64,7 +64,6 @@ function calcularSuma() {
     let matriz1 = [];
     let matriz2 = [];
 
-    // Obtener los valores de las matrices
     for (let i = 0; i < filas; i++) {
         let fila1 = [];
         let fila2 = [];
@@ -84,12 +83,10 @@ function calcularSuma() {
         matriz2.push(fila2);
     }
 
-    // Ocultar el botón de calcular y mostrar mensaje de espera
     document.getElementById("calcular").style.display = "none";
     document.getElementById("resultado").innerHTML = "Calculando...";
 
-    // Enviar las matrices al servidor (Express)
-    fetch('http://localhost:8000/sumar_matrices', {
+    fetch('/sumar_matrices', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -99,12 +96,12 @@ function calcularSuma() {
     .then(response => response.json())
     .then(data => {
         mostrarResultado(data.resultado);
-        document.getElementById("calcular").style.display = "block";  // Mostrar el botón nuevamente
+        document.getElementById("calcular").style.display = "block";
     })
     .catch(error => {
         alert("Hubo un error al comunicarse con el servidor.");
         console.error('Error:', error);
-        document.getElementById("calcular").style.display = "block";  // Mostrar el botón nuevamente
+        document.getElementById("calcular").style.display = "block";
     });
 }
 
